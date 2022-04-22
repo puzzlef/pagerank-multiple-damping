@@ -928,3 +928,54 @@ template <class T, class TA, class V>
 inline void multiplyValueW(vector<TA>& a, const vector<T>& x, size_t i, size_t N, const V& v) {
   multiplyValue(x, a, i, N, v);
 }
+
+
+
+
+// SPLIT-BLOCKS
+// ------------
+
+template <class T>
+void splitBlocksW(vector2d<T>& a, size_t j, size_t B, size_t b, const vector<T>& x, size_t i, size_t N) {
+  for (size_t h=i; h<i+N; h++, j++) {
+    for (size_t o=0; o<b; o++)
+      a[o][j] = x[h*B+o];
+  }
+}
+template <class T>
+inline void splitBlocksW(vector2d<T>& a, size_t B, size_t b, const vector<T>& x) {
+  if (!a.empty()) splitBlocksW(a, 0, B, b, x, 0, a[0].size());
+}
+
+template <class T>
+inline vector2d<T> splitBlocks(size_t B, size_t b, const vector<T>& x) {
+  int N = (x.size()+B-b)/B;
+  vector2d<T> a(b, vector<int>(N, 0));
+  joinBlocksW(a, B, b, x);
+  return a;
+}
+
+
+
+
+// JOIN-BLOCKS
+// -----------
+
+template <class T>
+void joinBlocksW(vector<T>& a, size_t j, size_t B, size_t b, const vector2d<T>& x, size_t i, size_t N) {
+  for (size_t h=i; h<i+N; h++, j++) {
+    for (size_t o=0; o<b; o++)
+      a[j*B+o] = x[o][h];
+  }
+}
+template <class T>
+inline void joinBlocksW(vector<T>& a, size_t B, size_t b, const vector2d<T>& x) {
+  if (!x.empty()) joinBlocksW(a, 0, B, b, x, 0, x[0].size());
+}
+
+template <class T>
+inline vector<T> joinBlocks(size_t B, size_t b, const vector2d<T>& x) {
+  vector<T> a(x.empty()? 0 : x[0].size());
+  joinBlocksW(a, B, b, x);
+  return a;
+}

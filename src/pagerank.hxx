@@ -35,6 +35,11 @@ struct PagerankMultiOptions {
 
   PagerankMultiOptions(int repeat=1, int toleranceNorm=1, const vector<T>& damping={0.85}, T tolerance=1e-6, int maxIterations=500) :
   repeat(repeat), toleranceNorm(toleranceNorm), damping(damping), tolerance(tolerance), maxIterations(maxIterations) {}
+
+  // Get ith Pagerank options.
+  PagerankOptions option(int i) {
+    return {repeat, toleranceNorm, damping[i], tolerance, maxIterations};
+  }
 };
 
 
