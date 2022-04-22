@@ -79,7 +79,7 @@ void pagerankCalculateW(vector<T>& a, const vector<T>& c, const vector<int>& vfr
 template <class T>
 void pagerankCalculateBlockW(vector<T>& a, int B, int b, const vector<T>& c, const vector<int>& vfrom, const vector<int>& efrom, int i, int n, const vector<T>& c0) {
   for (int v=i; v<i+n; v++) {
-    copyValues(c0, a, v*B, b);
+    copyValuesW(a.data()+v*B, c0.data(), b);
     sumValuesAtBlockU(a, v, B, b, c, 0, sliceIterable(efrom, vfrom[v], vfrom[v+1]));
   }
 }
@@ -103,7 +103,7 @@ T pagerankError(const vector<T>& x, const vector<T>& y, int i, int N, int EF) {
 
 template <class T>
 void pagerankErrorBlockW(vector<T>& a, int B, int b, const vector<T>& x, const vector<T>& y, int i, int N, int EF) {
-  fillValueU(a, 0, b, T());
+  fillValueU(a, 0, B, T());
   switch (EF) {
     case 1:  l1NormBlockU(a, B, b, x, y, i, N); break;
     case 2:  l2NormBlockU(a, B, b, x, y, i, N); break;

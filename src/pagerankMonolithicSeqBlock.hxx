@@ -23,7 +23,6 @@ int pagerankMonolithicSeqBlockLoopU(vector<T>& a, vector<T>& r, vector<T>& c, co
   vector<T> c0(B), el(B);
   while (l<L) {
     pagerankTeleportBlockW(c0, B, b, r, vdata, N, p);
-    // T c0 = pagerankTeleport(r, vdata, N, p);
     pagerankCalculateBlockW(a, B, b, c, vfrom, efrom, i, n, c0);  // assume contribtions (c) is precalculated
     pagerankErrorBlockW(el, B, b, a, r, i, n, EF); l += b;        // b iterations complete
     b = findIf(el, [&](auto e) { return e<E || l>=L; });          // check tolerance, iteration limit
