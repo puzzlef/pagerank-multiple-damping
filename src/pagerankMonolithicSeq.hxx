@@ -19,10 +19,10 @@ using std::swap;
 template <class T>
 int pagerankMonolithicSeqLoopU(vector<T>& a, vector<T>& r, vector<T>& c, const vector<T>& f, const vector<int>& vfrom, const vector<int>& efrom, const vector<int>& vdata, int i, int n, int N, T p, T E, int L, int EF) {
   int l = 0;
-  while (l<L) {
-    T c0 = pagerankTeleport(r, vdata, N, p);
+  for (;;) {
+    T c0 = pagerankTeleport(r, vdata, N, p);           // calculate teleport contribution
     pagerankCalculateW(a, c, vfrom, efrom, i, n, c0);  // assume contribtions (c) is precalculated
-    T el = pagerankError(a, r, i, n, EF); ++l;         // one iteration complete
+    T el = pagerankError(a, r, i, n, EF); ++l;         // measure error, one iteration complete
     if (el<E || l>=L) break;                           // check tolerance, iteration limit
     multiplyValuesW(c, a, f, i, n);                    // update partial contributions (c)
     swap(a, r);                                        // final ranks always in (a)

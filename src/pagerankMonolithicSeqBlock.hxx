@@ -18,19 +18,19 @@ using std::swap;
 
 template <class T>
 int pagerankMonolithicSeqBlockLoopU(vector<T>& a, vector<T>& r, vector<T>& c, const vector<T>& f, const vector<int>& vfrom, const vector<int>& efrom, const vector<int>& vdata, int i, int n, int N, const vector<T>& p, T E, int L, int EF) {
-  int l = 0;
+  int l = 0, ls = 0;
   int B = p.size(), b = B;
   vector<T> c0(B), el(B);
-  while (l<L) {
-    pagerankTeleportBlockW(c0, B, b, r, vdata, N, p);
+  for (;;) {
+    pagerankTeleportBlockW(c0, B, b, r, vdata, N, p);             // calculate teleport contribution
     pagerankCalculateBlockW(a, B, b, c, vfrom, efrom, i, n, c0);  // assume contribtions (c) is precalculated
-    pagerankErrorBlockW(el, B, b, a, r, i, n, EF); l += b;        // b iterations complete
-    b = findIf(el, [&](auto e) { return e<E || l>=L; });          // check tolerance, iteration limit
-    if (b == 0) break;                                            // check tolerance, iteration limit
+    pagerankErrorBlockW(el, B, b, a, r, i, n, EF); l++; ls += b;  // measure error, b iterations complete
+    b = findIf(el, [&](auto e) { return e<E; });                  // check tolerance, iteration limit
+    if (b == 0 || l>=L) break;                                    // check tolerance, iteration limit
     multiplyValuesBlockW(c, B, b, a, f, i, n);                    // update partial contributions (c)
     swap(a, r);                                                   // final ranks always in (a)
   }
-  return l;
+  return ls;
 }
 
 

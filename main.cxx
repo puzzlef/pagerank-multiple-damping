@@ -11,9 +11,9 @@ using namespace std;
 
 template <class G, class H>
 void runPagerank(const G& x, const H& xt, int repeat) {
-  using T = float;
+  using T = double;
   enum NormFunction { L0=0, L1=1, L2=2, Li=3 };
-  vector<T> dampings = rangeVector(0.6f, 0.9f, 0.3f/1);
+  vector<T> dampings = rangeVector(0.9, 0.6, -0.3001/32);
   vector2d<T> *inits = nullptr;
   int B = dampings.size();
 
@@ -31,7 +31,7 @@ void runPagerank(const G& x, const H& xt, int repeat) {
 
 int main(int argc, char **argv) {
   char *file = argv[1];
-  int repeat = argc>2? stoi(argv[2]) : 1; // 5
+  int repeat = argc>2? stoi(argv[2]) : 5;
   printf("Loading graph %s ...\n", file);
   auto x  = readMtxOutDiGraph(file); println(x);
   auto xt = transposeWithDegree(x);  print(xt); printf(" (transposeWithDegree)\n");
