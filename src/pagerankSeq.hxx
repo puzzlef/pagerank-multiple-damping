@@ -160,7 +160,7 @@ PagerankMultiResult<T> pagerankSeqBlock(const H& xt, const J& ks, int i, const M
     qc = joinBlocks(B, B, qcs);
   }
   float t = measureDurationMarked([&](auto mark) {
-    if (q) copyValuesW(r, qc);   // copy old ranks (qc), if given
+    if (qs) copyValuesW(r, qc);   // copy old ranks (qc), if given
     else fillValueU(r, T(1)/N);
     copyValuesW(a, r);
     mark([&] { pagerankFactorBlockW(f, B, B, vdata, 0, N, p); multiplyValuesW(c, a, f, 0, N*B); });  // calculate factors (f) and contributions (c)

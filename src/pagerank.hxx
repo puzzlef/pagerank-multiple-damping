@@ -37,7 +37,7 @@ struct PagerankMultiOptions {
   repeat(repeat), toleranceNorm(toleranceNorm), damping(damping), tolerance(tolerance), maxIterations(maxIterations) {}
 
   // Get ith Pagerank options.
-  PagerankOptions option(int i) {
+  PagerankOptions<T> option(int i) const {
     return {repeat, toleranceNorm, damping[i], tolerance, maxIterations};
   }
 };
@@ -78,6 +78,9 @@ struct PagerankMultiResult {
   int   iterations;
   float time;
 
+  PagerankMultiResult() :
+  ranks(), iterations(), time() {}
+
   PagerankMultiResult(vector2d<T>&& ranks, int iterations=0, float time=0) :
   ranks(ranks), iterations(iterations), time(time) {}
 
@@ -89,9 +92,9 @@ struct PagerankMultiResult {
   template <class G>
   static PagerankMultiResult<T> initial(const G& x, const vector2d<T>* qs=nullptr) {
     int  N = x.order();
-    if (qs) return {*qs, 0, 0};
     vector2d<T> as;
-    for (const auto& q : qs) {
+    if (qs) { as = *qs; return {as, 0, 0}; }
+    for (const auto& q : *qs) {
       auto a = createContainer(x, T());
       fillValueAtU(a, x.vertexKeys(), T(1)/N);
       as.push_back(move(a));

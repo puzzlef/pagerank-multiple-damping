@@ -22,8 +22,8 @@ using std::vector;
 template <class G, class H, class T=float>
 PagerankMultiResult<T> pagerankMonolithicSeqSingle(const G& x, const H& xt, const vector2d<T> *qs=nullptr, const PagerankMultiOptions<T>& os={}) {
   PagerankMultiResult<T> as;
-  for (int i=0; i<o.damping.size(); i++) {
-    auto a = pagerankMonolithicSeq(x, xt, qs? *qs[i] : nullptr, os.option(i));
+  for (int i=0; i<os.damping.size(); i++) {
+    auto a = pagerankMonolithicSeq(x, xt, qs? &((*qs)[i]) : nullptr, os.option(i));
     as.ranks.push_back(move(a.ranks));
     as.time += a.time;
     as.iterations += a.iterations;
@@ -46,8 +46,8 @@ PagerankMultiResult<T> pagerankMonolithicSeqSingle(const G& x, const vector2d<T>
 template <class G, class H, class T=float>
 PagerankMultiResult<T> pagerankMonolithicSeqSingleDynamic(const G& x, const H& xt, const G& y, const H& yt, const vector2d<T> *qs=nullptr, const PagerankMultiOptions<T>& os={}) {
   PagerankMultiResult<T> as;
-  for (int i=0; i<o.damping.size(); i++) {
-    auto a = pagerankMonolithicSeqDynamic(x, xt, y, yt, qs? *qs[i] : nullptr, os.option(i))
+  for (int i=0; i<os.damping.size(); i++) {
+    auto a = pagerankMonolithicSeqDynamic(x, xt, y, yt, qs? &((*qs)[i]) : nullptr, os.option(i));
     as.ranks.push_back(move(a.ranks));
     as.time += a.time;
     as.iterations += a.iterations;

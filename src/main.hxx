@@ -22,3 +22,5 @@
 #include "pagerank.hxx"
 #include "pagerankSeq.hxx"
 #include "pagerankMonolithicSeq.hxx"
+#include "pagerankMonolithicSeqSingle.hxx"
+#include "pagerankMonolithicSeqBlock.hxx"
