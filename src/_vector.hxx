@@ -487,6 +487,23 @@ inline V sumValuesAt(const vector<T>& x, size_t i, const J& is, V a=V()) {
 }
 
 
+template <class TA, class T, class J>
+void sumValuesAtBlockU(T* a, size_t B, size_t b, const T *x, const J& is) {
+  for (auto i : is) {
+    for (size_t o=0; o<b; o++)
+      a[o] += x[i*B+o];
+  }
+}
+template <class TA, class T, class J>
+inline void sumValuesAtBlockU(vector<T>& a, size_t B, size_t b, const vector<T>& x, const J& is) {
+  sumValuesAtBlockU(a.data(), B, b, x.data(), is);
+}
+template <class TA, class T, class J>
+inline void sumValuesAtBlockU(vector<T>& a, size_t j, size_t B, size_t b, const vector<T>& x, size_t i, const J& is) {
+  sumValuesAtBlockU(a.data()+j*B, B, b, x.data()+i*B, is);
+}
+
+
 
 
 // ADD-VALUE
@@ -754,6 +771,23 @@ inline V l1Norm(const vector<TX>& x, const vector<TY>& y, size_t i, size_t N, V 
 }
 
 
+template <class TA, class TX, class TY>
+void l1NormBlockU(TA *a, size_t B, size_t b, const TX *x, const TY *y, size_t N) {
+  for (size_t i=0; i<N; i++) {
+    for (size_t o=0; o<b; o++)
+      a[o] += abs(x[i*B+o] - y[i*B+o]);
+  }
+}
+template <class TA, class TX, class TY>
+inline void l1NormBlockU(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y) {
+  l1NormBlockU(a.data(), B, b, x.data(), y.data(), x.size(), v);
+}
+template <class TA, class TX, class TY>
+inline void l1NormBlockU(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y, size_t i, size_t N) {
+  l1NormBlockU(a.data(), B, b, x.data()+i*B, y.data()+i*B, N, v);
+}
+
+
 
 
 // L2-NORM
@@ -775,6 +809,23 @@ inline V l2Norm(const vector<TX>& x, const vector<TY>& y, size_t i, size_t N, V 
 }
 
 
+template <class TA, class TX, class TY>
+void l2NormBlockU(TA *a, size_t B, size_t b, const TX *x, const TY *y, size_t N) {
+  for (size_t i=0; i<N; i++) {
+    for (size_t o=0; o<b; o++)
+      a[o] += (x[i*B+o] - y[i*B+o]) * (x[i*B+o] - y[i*B+o]);
+  }
+}
+template <class TA, class TX, class TY>
+inline void l2NormBlockU(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y) {
+  l2NormBlockU(a.data(), B, b, x.data(), y.data(), x.size(), v);
+}
+template <class TA, class TX, class TY>
+inline void l2NormBlockU(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y, size_t i, size_t N) {
+  l2NormBlockU(a.data(), B, b, x.data()+i*B, y.data()+i*B, N, v);
+}
+
+
 
 
 // LI-NORM (INFINITY)
@@ -793,6 +844,23 @@ inline V liNorm(const vector<TX>& x, const vector<TY>& y, V a=V()) {
 template <class TX, class TY, class V=TX>
 inline V liNorm(const vector<TX>& x, const vector<TY>& y, size_t i, size_t N, V a=V()) {
   return liNorm(x.data()+i, y.data()+i, N, a);
+}
+
+
+template <class TA, class TX, class TY>
+void liNormBlockU(TA *a, size_t B, size_t b, const TX *x, const TY *y, size_t N) {
+  for (size_t i=0; i<N; i++) {
+    for (size_t o=0; o<b; o++)
+      a[o] = max(a[o], abs(x[i*B+o] - y[i*B+o]));
+  }
+}
+template <class TA, class TX, class TY>
+inline void liNormBlockU(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y) {
+  liNormBlockU(a.data(), B, b, x.data(), y.data(), x.size(), v);
+}
+template <class TA, class TX, class TY>
+inline void liNormBlockU(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y, size_t i, size_t N) {
+  liNormBlockU(a.data(), B, b, x.data()+i*B, y.data()+i*B, N, v);
 }
 
 
