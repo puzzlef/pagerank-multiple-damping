@@ -1,7 +1,7 @@
-# https://www.kaggle.com/wolfram77/puzzlef-pagerank-seq
+# https://www.kaggle.com/wolfram77/puzzlef-pagerank-multiple-damping-single-vs-block
 import os
 from IPython.display import FileLink
-src="pagerank-seq"
+src="pagerank-multiple-damping-single-vs-block"
 inp="/kaggle/input/graphs"
 out="{}.txt".format(src)
 !printf "" > "$out"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-src="pagerank-seq"
+src="pagerank-multiple-damping-single-vs-block"
 out="/home/resources/Documents/subhajit/$src.log"
 ulimit -s unlimited
 printf "" > "$out"
