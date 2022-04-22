@@ -897,6 +897,23 @@ inline void multiplyValuesW(vector<TA>& a, const vector<TX>& x, const vector<TY>
 }
 
 
+template <class TA, class TX, class TY>
+inline void multiplyValuesBlockW(TA *a, size_t B, size_t b, const TX *x, const TY *y, size_t N) {
+  for (size_t i=0; i<N; i++) {
+    for (size_t o=0; o<b; o++)
+      a[i*B+o] = x[i*B+o] * y[i*B+o];
+  }
+}
+template <class TX, class TY, class TA>
+inline void multiplyValuesBlockW(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y) {
+  multiplyValuesBlockW(a.data(), B, b, x.data(), y.data(), x.size()/B);
+}
+template <class TX, class TY, class TA>
+inline void multiplyValuesBlockW(vector<TA>& a, size_t B, size_t b, const vector<TX>& x, const vector<TY>& y, size_t i, size_t N) {
+  multiplyValuesBlockW(a.data()+i*B, B, b, x.data()+i*B, y.data()+i*B, N);
+}
+
+
 
 
 // MULTIPLY-VALUE
