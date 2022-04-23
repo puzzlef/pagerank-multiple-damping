@@ -11,9 +11,9 @@ using namespace std;
 
 template <class G, class H>
 void runPagerank(const G& x, const H& xt, int repeat) {
-  using T = double;
+  using T = float;
   enum NormFunction { L0=0, L1=1, L2=2, Li=3 };
-  vector<T> dampings = rangeVector(0.9, 0.6, -0.3001/32);
+  vector<T> dampings = rangeVector(0.9f, 0.6f, -0.3001f/32);
   vector2d<T> *inits = nullptr;
   int B = dampings.size();
 
