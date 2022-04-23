@@ -1,4 +1,4 @@
-Comparing performance of single vs block multiple damping factor based ranks for PageRank ([pull], [CSR]).
+Comparing performance of **single** vs **block** multiple damping factor based ranks for PageRank ([pull], [CSR]).
 
 The **damping factor** parameter is the [PageRank algorithm] controls the tendency
 of a user to follow one of the links on a given web page. A damping factor (α) of
@@ -68,6 +68,12 @@ $ ...
 
 - [PageRank Algorithm, Mining massive Datasets (CS246), Stanford University][PageRank algorithm]
 - [SuiteSparse Matrix Collection]
+
+<br>
+<br>
+
+[![](https://img.youtube.com/vi/Dr7ve331Ekg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dr7ve331Ekg)
+[![DOI](https://zenodo.org/badge/484143516.svg)](https://zenodo.org/badge/latestdoi/484143516)
 
 [PageRank algorithm]: https://www.youtube.com/watch?v=ke9g8hB0MEo
 [SuiteSparse Matrix Collection]: https://sparse.tamu.edu
