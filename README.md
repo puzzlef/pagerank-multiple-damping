@@ -73,6 +73,7 @@ $ ...
 <br>
 
 [![](https://img.youtube.com/vi/Dr7ve331Ekg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dr7ve331Ekg)
+[![ORG](https://img.shields.io/badge/org-puzzlef-green?logo=Org)](https://puzzlef.github.io)
 [![DOI](https://zenodo.org/badge/484143516.svg)](https://zenodo.org/badge/latestdoi/484143516)
 
 [PageRank algorithm]: https://www.youtube.com/watch?v=ke9g8hB0MEo
