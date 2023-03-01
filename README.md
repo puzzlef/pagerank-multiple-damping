@@ -1,4 +1,5 @@
-Comparing performance of **single** vs **block** multiple damping factor based ranks for PageRank ([pull], [CSR]).
+Comparing performance of **single** vs **block** multiple damping factor based
+ranks for PageRank algorithm .
 
 The **damping factor** parameter is the [PageRank algorithm] controls the tendency
 of a user to follow one of the links on a given web page. A damping factor (α) of
@@ -23,42 +24,24 @@ graph data structure (in case of *single*-based approach) to one, and by increas
 the amount of sequential memory accesses into the rank vector (due to blocks of `D`
 ranks per vertex).
 
-Results indicate that there is significant overhead when running the *block*-based
-approach with a *block size* of `1` (one damping factor only). This could be due to
-the additional logic which for some reason prevents the compiler from being able to
-optimize the code. However, with a *block size* of `32` (32 damping factors in
-descending order), the *block*-based approach achieves an average speedup of `1.67x`
-([GM-RATIO]) / `1.70x` ([AM-RATIO]) with respect to *single*-based approach.
-
-All outputs are saved in [out](out/) and a small part of the output is listed
-here. Some [charts] are also included below, generated from [sheets]. The input
-data used for this experiment is available at the [SuiteSparse Matrix Collection].
-
 <br>
 
-```bash
-$ g++ -std=c++17 -O3 main.cxx
-$ ./a.out ~/data/web-Stanford.mtx
-$ ./a.out ~/data/web-BerkStan.mtx
-$ ...
 
-# Loading graph /home/subhajit/data/web-Stanford.mtx ...
-# order: 281903 size: 2312497 [directed] {}
-# order: 281903 size: 2312497 [directed] {} (transposeWithDegree)
-# [#32; 08834.382 ms; 1403 iters.] [0.0000e+00 err.] pagerankSeqSingle
-# [#32; 06651.837 ms; 1403 iters.] [1.2975e-05 err.] pagerankSeqBlock
-#
-# Loading graph /home/subhajit/data/web-BerkStan.mtx ...
-# order: 685230 size: 7600595 [directed] {}
-# order: 685230 size: 7600595 [directed] {} (transposeWithDegree)
-# [#32; 19374.484 ms; 1431 iters.] [0.0000e+00 err.] pagerankSeqSingle
-# [#32; 10376.712 ms; 1431 iters.] [1.4077e-05 err.] pagerankSeqBlock
-#
-# ...
-```
+### With Sequential implementation
+
+Results on a sequential implementation ([implementation-sequential]) indicate
+that there is significant overhead when running the *block*-based approach with
+a *block size* of `1` (one damping factor only). This could be due to the
+additional logic which for some reason prevents the compiler from being able to
+optimize the code. However, with a *block size* of `32` (32 damping factors in
+descending order), the *block*-based approach achieves an average speedup of
+`1.67x` ([GM-RATIO]) / `1.70x` ([AM-RATIO]) with respect to *single*-based
+approach.
 
 [![](https://i.imgur.com/IbT7PGu.png)][sheetp]
 [![](https://i.imgur.com/W51wCwO.png)][sheetp]
+
+[implementation-sequential]: https://github.com/puzzlef/pagerank-multiple-damping/tree/implementation-sequential
 
 <br>
 <br>
@@ -72,14 +55,14 @@ $ ...
 <br>
 <br>
 
+
 [![](https://img.youtube.com/vi/Dr7ve331Ekg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dr7ve331Ekg)
 [![ORG](https://img.shields.io/badge/org-puzzlef-green?logo=Org)](https://puzzlef.github.io)
 [![DOI](https://zenodo.org/badge/484143516.svg)](https://zenodo.org/badge/latestdoi/484143516)
 
+
 [PageRank algorithm]: https://www.youtube.com/watch?v=ke9g8hB0MEo
 [SuiteSparse Matrix Collection]: https://sparse.tamu.edu
-[pull]: https://github.com/puzzlef/pagerank-push-vs-pull
-[CSR]: https://github.com/puzzlef/pagerank-class-vs-csr
 [GM-RATIO]: https://gist.github.com/wolfram77/6dc740392d2f4e713fafdaea4ec1eba2
 [AM-RATIO]: https://gist.github.com/wolfram77/6dc740392d2f4e713fafdaea4ec1eba2
 [charts]: https://photos.app.goo.gl/eRnMmdqxtiiDbchFA
