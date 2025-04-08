@@ -59,7 +59,7 @@ approach.
 [![](https://img.youtube.com/vi/Dr7ve331Ekg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dr7ve331Ekg)
 [![ORG](https://img.shields.io/badge/org-puzzlef-green?logo=Org)](https://puzzlef.github.io)
 [![DOI](https://zenodo.org/badge/484143516.svg)](https://zenodo.org/badge/latestdoi/484143516)
-
+![](https://ga-beacon.deno.dev/G-KD28SG54JQ:hbAybl6nQFOtmVxW4if3xw/github.com/puzzlef/pagerank-multiple-damping)
 
 [PageRank algorithm]: https://www.youtube.com/watch?v=ke9g8hB0MEo
 [SuiteSparse Matrix Collection]: https://sparse.tamu.edu
